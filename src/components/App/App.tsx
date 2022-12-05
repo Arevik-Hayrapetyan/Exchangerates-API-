@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
-import "./App.css";
+import Convert from "../Convert/Convert";
+import Latest from "../Latest/Latest";
 import { currencyAsync } from "../../app/slices/currencySlice";
-import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../../app/hooks";
+import { ChakraProvider } from "@chakra-ui/react";
+import "./App.css";
+
 
 function App() {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(currencyAsync({ to: "AMD", from: "EUR", amount: 5 }));
-  }, []);
-  return <div className="App">barev</div>;
+    return (
+        <ChakraProvider>
+          <div className="App">
+           <Convert/>
+           <Latest/>
+           </div>
+        </ChakraProvider>
+    );
 }
 
 export default App;
