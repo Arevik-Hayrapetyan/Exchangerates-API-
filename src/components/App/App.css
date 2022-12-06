@@ -2,5 +2,5 @@
     display: grid;
     grid-template-columns: 3fr 5fr;
     column-gap: 20px;
-    /* justify-content: space-around; */
+    justify-items: center;
 }

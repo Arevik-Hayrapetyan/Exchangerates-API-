@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { latestCurrencies } from "../../app/slices/currencySlice";
-import { selectCurrencies } from "../../app/slices/currencySlice";
-import { List, ListItem, ListIcon, OrderedList, UnorderedList } from "@chakra-ui/react";
+import { selectCurrencies, selectBaseCurrency } from "../../app/slices/currencySlice";
+import { Heading } from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react";
 
 export default function Latest() {
     const dispatch = useAppDispatch();
     const currencies = useAppSelector(selectCurrencies);
+    const baseCurrency = useAppSelector(selectBaseCurrency);
 
     useEffect(() => {
         dispatch(latestCurrencies({ base: "EUR" }));
@@ -14,21 +16,27 @@ export default function Latest() {
     }, []);
 
     return (
-        <div >
-            Latest
-            <div></div>
-            <List>
+        <div style={{ padding: "15px", display: "flex", alignItems: "center", flexDirection: "column", width: "60%" }}>
+            <Heading as="h4" size="md">
+                Latest
+            </Heading>
+            <Heading as="h5" size="sm">
+                Base:
+                <span style={{ color: "rgba(66, 153, 225, 0.6)" }}> {baseCurrency}</span>
+            </Heading>
+
+            <Select>
                 {currencies?.length > 0 &&
                     currencies.map(({ key, value }) => {
                         if (typeof value === "number") {
                             return (
-                                <ListItem key={key}>
+                                <option value={value} key={key}>
                                     {key}:{value}
-                                </ListItem>
+                                </option>
                             );
                         }
                     })}
-            </List>
+            </Select>
         </div>
     );
 }

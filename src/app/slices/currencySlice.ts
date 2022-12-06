@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState, AppThunk } from "../../app/store";
+import { RootState } from "../../app/store";
 import { fetchData, getAllCurrencies } from "../../api";
 import { Arguments } from "../../api";
 import { Base } from "../../api";
@@ -14,8 +14,12 @@ export interface CurrencyState {
 const initialState: CurrencyState = {
     convertedValue: 0,
     status: "loading",
-    currencies: [],
-    base: "",
+    currencies: [
+        { key: "AMD", value: 500 },
+        { key: "EUR", value: 400 },
+        { key: "USD", value: 480 },
+    ],
+    base: "EUR",
 };
 
 export const currencyAsync = createAsyncThunk("currency/fetchCovertedValue", async ({ to, from, amount }: Arguments) => {
@@ -54,10 +58,7 @@ export const currencySlice = createSlice({
     },
 });
 
-// export const {} = currencySlice.actions;
-
 export const selectCurrencies = (state: RootState) => state.currency.currencies;
 export const selectConvertedValue = (state: RootState) => state.currency.convertedValue;
+export const selectBaseCurrency = (state: RootState) => state.currency.base;
 export default currencySlice.reducer;
-
-// currencies= [{key:"EUR", value:480},{key:"EUR", value:480},{key:"EUR", value:480}]

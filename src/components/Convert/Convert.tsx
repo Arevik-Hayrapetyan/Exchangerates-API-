@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { currencyAsync } from "../../app/slices/currencySlice";
-import { Input } from "@chakra-ui/react";
-import { FormControl, FormLabel, FormErrorMessage, FormHelperText } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
-import "./Convert.css";
 import { selectConvertedValue } from "../../app/slices/currencySlice";
+import { Input } from "@chakra-ui/react";
+import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 export default function Convert() {
     const dispatch = useAppDispatch();
@@ -14,9 +13,9 @@ export default function Convert() {
     useEffect(() => {
         dispatch(currencyAsync({ to: "AMD", from: "EUR", amount: 5 }));
     }, []);
-    
+
     return (
-        <div className="formContainer" style={{ marginLeft: "20px" }}>
+        <div className="formContainer" style={{ marginLeft: "20px", padding: "15px" }}>
             <FormControl>
                 <FormLabel>Amount</FormLabel>
                 <Input type="number" placeholder="amount" />
