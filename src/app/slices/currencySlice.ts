@@ -15,12 +15,11 @@ const initialState: CurrencyState = {
     convertedValue: 0,
     status: "loading",
     currencies: [],
-    base: "EUR",
+    base: "",
 };
 
 export const currencyAsync = createAsyncThunk("currency/fetchCovertedValue", async ({ to, from, amount }: Arguments) => {
     const response = await fetchData({ to, from, amount });
-
     return response;
 });
 
@@ -55,10 +54,10 @@ export const currencySlice = createSlice({
     },
 });
 
-export const {} = currencySlice.actions;
+// export const {} = currencySlice.actions;
 
 export const selectCurrencies = (state: RootState) => state.currency.currencies;
-
+export const selectConvertedValue = (state: RootState) => state.currency.convertedValue;
 export default currencySlice.reducer;
 
 // currencies= [{key:"EUR", value:480},{key:"EUR", value:480},{key:"EUR", value:480}]

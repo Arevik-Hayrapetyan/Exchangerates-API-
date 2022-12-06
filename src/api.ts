@@ -9,9 +9,9 @@ export type Base = {
 };
 
 const myHeaders: HeadersInit = new Headers();
-
-myHeaders.append("apikey", "oC6bTxw7mGgeB3JcZDAbwCAVYzXZLqQI");
-console.log(process.env.REACT_APP_API_KEY);
+if (process.env.REACT_APP_API_KEY) {
+    myHeaders.append("apikey", process.env.REACT_APP_API_KEY);
+}
 
 export async function fetchData({ to, from, amount }: Arguments) {
     const response = await fetch(`https://api.apilayer.com/exchangerates_data/convert?to=${to}&from=${from}&amount=${amount}`, {
