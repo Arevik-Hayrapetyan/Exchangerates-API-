@@ -1,0 +1,1 @@
+export const currencies:Array<string> = ["EUR", "USD","AMD"]

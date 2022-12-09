@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { currencyAsync } from "../../app/slices/currencySlice";
 import { selectConvertedValue } from "../../app/slices/currencySlice";
+import { currencies } from "../../constants";
+import Section from "../Section/Section";
 import { Input } from "@chakra-ui/react";
 import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react";
 
 export default function Convert() {
     const dispatch = useAppDispatch();
@@ -17,12 +20,10 @@ export default function Convert() {
     return (
         <div className="formContainer" style={{ marginLeft: "20px", padding: "15px" }}>
             <FormControl>
-                <FormLabel>Amount</FormLabel>
-                <Input type="number" placeholder="amount" />
-                <FormLabel>From</FormLabel>
-                <Input type="text" placeholder="from" />
-                <FormLabel>To</FormLabel>
-                <Input type="text" placeholder="to" />
+                <Section name={"Amount"} type={"number"} includeSelect={false} placeholder="amount" />
+                <Section name={"From"} type={"string"} includeSelect={true} placeholder="EUR" />
+                <Section name={"To"} type={"string"} includeSelect={true} placeholder="USD" />
+
                 <div style={{ display: "flex", flexDirection: "row", marginTop: 15, justifyContent: "space-between" }}>
                     <Button colorScheme="blue">Covert</Button>
                     <FormHelperText> {convertedValue}</FormHelperText>

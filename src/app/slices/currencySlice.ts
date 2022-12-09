@@ -5,14 +5,14 @@ import { Arguments } from "../../api";
 import { Base } from "../../api";
 
 export interface CurrencyState {
-    convertedValue: number;
+    convertedValue: number|null;
     status: "loading" | "success" | "failed";
     currencies: { key: string; value: number | unknown }[];
     base: string;
 }
 
 const initialState: CurrencyState = {
-    convertedValue: 0,
+    convertedValue: null,
     status: "loading",
     currencies: [
         { key: "AMD", value: 500 },
