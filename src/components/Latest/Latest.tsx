@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { latestCurrencies } from "../../app/slices/currencySlice";
+// import { latestCurrencies } from "../../app/slices/currencySlice";
 import { selectCurrencies, selectBaseCurrency } from "../../app/slices/currencySlice";
 import { Heading } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
@@ -11,7 +11,7 @@ export default function Latest() {
     const baseCurrency = useAppSelector(selectBaseCurrency);
 
     useEffect(() => {
-        dispatch(latestCurrencies({ base: "EUR" }));
+        // dispatch(latestCurrencies({ base: "EUR" }));
         console.log(currencies);
     }, []);
 

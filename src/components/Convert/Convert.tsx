@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { currencyAsync } from "../../app/slices/currencySlice";
 import { selectConvertedValue } from "../../app/slices/currencySlice";
 import { currencies } from "../../constants";
 import Section from "../Section/Section";
@@ -14,7 +13,7 @@ export default function Convert() {
     const convertedValue = useAppSelector(selectConvertedValue);
 
     useEffect(() => {
-        dispatch(currencyAsync({ to: "AMD", from: "EUR", amount: 5 }));
+        // dispatch(currencyAsync({ to: "AMD", from: "EUR", amount: 5 }));
     }, []);
 
     return (
