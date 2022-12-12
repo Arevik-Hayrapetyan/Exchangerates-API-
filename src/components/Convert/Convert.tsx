@@ -1,30 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectConvertedValue } from "../../app/slices/currencySlice";
-import { currencies } from "../../constants";
+import { selectConvertedValue, selectValues } from "../../app/slices/currencySlice";
+import { currencyAsync } from "../../app/slices/currencySlice";
 import Section from "../Section/Section";
-import { Input } from "@chakra-ui/react";
-import { FormControl, FormLabel, FormHelperText } from "@chakra-ui/react";
+import { FormControl, FormHelperText } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-import { Select } from "@chakra-ui/react";
 
 export default function Convert() {
     const dispatch = useAppDispatch();
     const convertedValue = useAppSelector(selectConvertedValue);
+    const values = useAppSelector(selectValues);
 
-    useEffect(() => {
-        // dispatch(currencyAsync({ to: "AMD", from: "EUR", amount: 5 }));
-    }, []);
+    function handleConvert() {
+        dispatch(currencyAsync(values));
+    }
 
     return (
         <div className="formContainer" style={{ marginLeft: "20px", padding: "15px" }}>
             <FormControl>
                 <Section name={"Amount"} type={"number"} includeSelect={false} placeholder="amount" />
                 <Section name={"From"} type={"string"} includeSelect={true} placeholder="EUR" />
-                <Section name={"To"} type={"string"} includeSelect={true} placeholder="USD" />
+                <Section name={"To"} type={"string"} includeSelect={true} placeholder="USD" selected={true}/>
 
                 <div style={{ display: "flex", flexDirection: "row", marginTop: 15, justifyContent: "space-between" }}>
-                    <Button colorScheme="blue">Covert</Button>
+                    <Button colorScheme="blue" onClick={handleConvert}>
+                        Covert
+                    </Button>
                     <FormHelperText> {convertedValue}</FormHelperText>
                 </div>
             </FormControl>
